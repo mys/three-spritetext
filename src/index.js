@@ -30,24 +30,25 @@ export default class extends THREE.Sprite {
   _genCanvas() {
     const canvas = this._canvas;
     const ctx = canvas.getContext('2d');
+    const expandVertically = 7; // set text above 3d object
 
     const font = `normal ${this.fontSize}px ${this.fontFace}`;
 
     ctx.font = font;
     const textWidth = ctx.measureText(this.text).width;
     canvas.width = textWidth;
-    canvas.height = this.fontSize;
+    canvas.height = this.fontSize * expandVertically;
 
     ctx.font = font;
     ctx.fillStyle = this.color;
-    ctx.textBaseline = 'bottom';
-    ctx.fillText(this.text, 0, canvas.height);
+    ctx.textBaseline = 'top';
+    ctx.fillText(this.text, 0, 0);
 
     // Inject canvas into sprite
     this._texture.image = canvas;
     this._texture.needsUpdate = true;
 
-    this.scale.set(this.textHeight * canvas.width / canvas.height, this.textHeight);
+    this.scale.set(this.textHeight * canvas.width / canvas.height * expandVertically, this.textHeight * expandVertically);
   }
 
   clone() {
