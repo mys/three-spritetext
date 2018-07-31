@@ -32,7 +32,7 @@ export default class extends THREE.Sprite {
     const ctx = canvas.getContext('2d');
     const expandVertically = 7; // set text above 3d object
 
-    const font = `normal ${this.fontSize}px ${this.fontFace}`;
+    const font = `bold ${this.fontSize}px ${this.fontFace}`;
 
     ctx.font = font;
     const textWidth = ctx.measureText(this.text).width;
